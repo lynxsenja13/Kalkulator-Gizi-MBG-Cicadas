@@ -1328,6 +1328,7 @@ function generateListPenerima() {
 
   loadCache();
   loadDatabase();
+  renderEditorPenerima();
 };
   
   function sdSemuaLibur() {
@@ -2086,6 +2087,7 @@ function blokGizi(judul, data) {
   });
   
   window.addEventListener("load", () => {
+    renderEditorPenerima();
     isDataChanged = false;
   });
   

@@ -325,19 +325,50 @@ window.APP_READY = true;
 </div>
 
   <div class="card dark card-hasil">
+
   <div class="card-hasil-header">
     <h3>Hasil Laporan</h3>
   </div>
 
-  <textarea id="captionOutput" oninput="updateJumlahLaporan()"></textarea>
+  <!-- ========================= -->
+  <!-- EDITOR PENERIMA -->
+  <!-- ========================= -->
 
-  <button class="btn-copy" onclick="copyCaptionWA()">
+  <div class="editor-wrapper">
+
+    <h4>⚙️ Pengaturan Penerima</h4>
+
+    <div id="editorPenerima"></div>
+
+    <button class="btn-secondary"
+            onclick="tambahPenerima()">
+      + Tambah Penerima
+    </button>
+
+    <button class="btn-success"
+            onclick="syncTextareaToData()">
+      Sinkronkan Textarea
+    </button>
+
+  </div>
+
+  <!-- ========================= -->
+  <!-- TEXTAREA -->
+  <!-- ========================= -->
+
+  <textarea id="captionOutput"></textarea>
+
+  <button class="btn-copy"
+          onclick="copyCaptionWA()">
     📋 Copy WA
   </button>
 
-  <button class="btn-kirim" onclick="kirimSpreadsheet()" id="btnKirim">
-  Kirim ke Spreadsheet
+  <button class="btn-kirim"
+          onclick="kirimSpreadsheet()"
+          id="btnKirim">
+    Kirim ke Spreadsheet
   </button>
+
 </div>
 
 <script>

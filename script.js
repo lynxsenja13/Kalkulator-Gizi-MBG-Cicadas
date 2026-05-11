@@ -2703,11 +2703,13 @@ function updateJumlahLaporan() {
 
   const textarea = document.getElementById("captionOutput");
 
-  // 🔥 SIMPAN POSISI CURSOR
-  const start = textarea.selectionStart;
-  const end = textarea.selectionEnd;
+  // 🔥 SIMPAN CURSOR SEBELUM UPDATE
+  const cursorPos = textarea.selectionStart;
 
-  let text = textarea.value;
+  // 🔥 SIMPAN VALUE LAMA
+  const oldValue = textarea.value;
+
+  let text = oldValue;
 
   // Ambil semua angka dari poin daftar
   const regex = /^\d+\.\s.*?=\s*(\d+)/gm;
@@ -2749,19 +2751,15 @@ function updateJumlahLaporan() {
     `Jumlah makan : *${jumlahMakan}* porsi.`
   );
 
+  // 🔥 HITUNG SELISIH PANJANG
+  const diff = text.length - oldValue.length;
+
   // 🔥 UPDATE TEXTAREA
   textarea.value = text;
 
-  // 🔥 KEMBALIKAN CURSOR
-  textarea.focus();
+  // 🔥 RESTORE CURSOR
+  const newCursor = cursorPos + diff;
 
-  requestAnimationFrame(() => {
-
-    // 🔥 BATASI AGAR TIDAK ERROR
-    const posisi = Math.min(start, textarea.value.length);
-
-    textarea.setSelectionRange(posisi, posisi);
-
-  });
+  textarea.setSelectionRange(newCursor, newCursor);
 
 }

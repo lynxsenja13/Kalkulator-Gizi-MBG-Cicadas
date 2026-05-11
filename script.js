@@ -2142,7 +2142,7 @@ function kirimSpreadsheet() {
 
   Swal.fire({
     title: "Berhasil!",
-    text: "Laporan berhasil dikirim",
+    text: "Laporan Berhasil Dikirim Ke Spreadsheet",
     icon: "success",
     draggable: true
   });
@@ -2155,7 +2155,7 @@ function kirimSpreadsheet() {
   Swal.fire({
     icon: "error",
     title: "Oops...",
-    text: "Laporan gagal dikirim!",
+    text: "Laporan Gagal Dikirim!",
     footer: "Periksa koneksi atau server Apps Script"
   });
 

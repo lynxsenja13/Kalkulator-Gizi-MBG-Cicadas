@@ -64,8 +64,8 @@
   
   // ================= DATA PENERIMA =================
   const PENERIMA_DEFAULT = {
-    "BALITA": 211,
-    "BUMIL & BUSUI": 125,
+    "BALITA": 205,
+    "BUMIL & BUSUI": 127,
   
     "SD Awi Gombong": 1016,
     "SD YAS": 186,
@@ -1224,8 +1224,8 @@
   function hitungPenerimaFinal() {
   
     let data = {
-      "BALITA": kategoriLibur["Balita"] ? 0 : 211,
-      "BUMIL & BUSUI": kategoriLibur["Bumil & Busui"] ? 0 : 125,
+      "BALITA": kategoriLibur["Balita"] ? 0 : 205,
+      "BUMIL & BUSUI": kategoriLibur["Bumil & Busui"] ? 0 : 127,
   
       "SD Awi Gombong": kategoriLibur["SD Awi Gombong"] ? 0 : 1016,
       "SD YAS": kategoriLibur["SD YAS"] ? 0 : 186,

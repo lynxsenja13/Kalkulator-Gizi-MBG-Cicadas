@@ -335,33 +335,45 @@ window.APP_READY = true;
   <!-- ========================= -->
 
   <!-- TOGGLE -->
-<button class="btn-secondary"
-        onclick="togglePengaturanPenerima()">
-  ⚙️ Pengaturan Penerima
-</button>
+<div class="pengaturan-card">
 
-<!-- WRAPPER -->
-<div id="pengaturanPenerima"
-     class="editor-wrapper"
-     style="display:none;">
+  <button class="pengaturan-toggle"
+          onclick="togglePengaturanPenerima()">
 
-  <h4>⚙️ Pengaturan Penerima</h4>
+    <div class="pengaturan-left">
+      <span class="gear-icon">⚙️</span>
+      <span>Pengaturan Penerima</span>
+    </div>
 
-  <div id="editorPenerima"></div>
+    <span id="pengaturanArrow"
+          class="pengaturan-arrow">
+      ▼
+    </span>
 
-  <div class="action-row">
+  </button>
 
-    <button class="btn-secondary"
-            onclick="tambahPenerima()">
-      + Tambah Penerima
-    </button>
+  <div id="pengaturanPenerima"
+       class="pengaturan-content">
 
-    <button class="btn-success"
-            onclick="simpanPengaturanPenerima()">
-      💾 Simpan Permanen
-    </button>
+    <div id="editorPenerima"></div>
+
+    <div class="pengaturan-action">
+
+      <button class="btn-secondary"
+              onclick="tambahPenerima()">
+        + Tambah
+      </button>
+
+      <button class="btn-success"
+              onclick="simpanPengaturanPenerima()">
+        💾 Simpan
+      </button>
+
+    </div>
 
   </div>
+
+</div>
 
     <button class="btn-success"
             onclick="syncTextareaToData()">

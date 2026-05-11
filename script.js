@@ -2703,6 +2703,10 @@ function updateJumlahLaporan() {
 
   const textarea = document.getElementById("captionOutput");
 
+  // 🔥 SIMPAN POSISI CURSOR
+  const start = textarea.selectionStart;
+  const end = textarea.selectionEnd;
+
   let text = textarea.value;
 
   // Ambil semua angka dari poin daftar
@@ -2745,6 +2749,19 @@ function updateJumlahLaporan() {
     `Jumlah makan : *${jumlahMakan}* porsi.`
   );
 
-  // Update textarea
+  // 🔥 UPDATE TEXTAREA
   textarea.value = text;
+
+  // 🔥 KEMBALIKAN CURSOR
+  textarea.focus();
+
+  requestAnimationFrame(() => {
+
+    // 🔥 BATASI AGAR TIDAK ERROR
+    const posisi = Math.min(start, textarea.value.length);
+
+    textarea.setSelectionRange(posisi, posisi);
+
+  });
+
 }

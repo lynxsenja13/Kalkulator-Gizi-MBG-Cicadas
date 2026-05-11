@@ -384,7 +384,10 @@ window.APP_READY = true;
   <!-- TEXTAREA -->
   <!-- ========================= -->
 
-  <textarea id="captionOutput"></textarea>
+  <textarea
+  id="captionOutput"
+  oninput="syncTextareaToDataTemporary()">
+</textarea>
 
   <button class="btn-copy"
           onclick="copyCaptionWA()">

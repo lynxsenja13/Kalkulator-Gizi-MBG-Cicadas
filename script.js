@@ -2375,27 +2375,31 @@ function kirimSpreadsheet() {
   formData.append("data", JSON.stringify(data));
 
   fetch(API_URL2, {
-    method: "POST",
-    body: formData
-  })
-  .then(res => res.text())
-  .then(() => {
+  method: "POST",
+  body: formData
+})
+.then(res => res.text())
+.then(() => {
+
   Swal.fire({
     title: "Berhasil!",
     text: "Laporan berhasil dikirim",
     icon: "success",
-    confirmButtonText: "OK"
+    draggable: true
   });
+
 })
 .catch(err => {
+
   console.error(err);
 
   Swal.fire({
-    title: "Gagal!",
-    text: "Laporan gagal dikirim",
     icon: "error",
-    confirmButtonText: "Tutup"
+    title: "Oops...",
+    text: "Laporan gagal dikirim!",
+    footer: "Periksa koneksi atau server Apps Script"
   });
+
 });
 }
   

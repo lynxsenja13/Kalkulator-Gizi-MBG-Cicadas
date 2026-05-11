@@ -2959,6 +2959,24 @@ function renderEditorPenerima() {
 
 }
 
+function updateJumlahPenerima(index, value) {
+
+  window.dataPenerima[index].jumlah =
+    Number(value) || 0;
+
+  generateCaptionHarian();
+
+}
+
+function updateNamaPenerima(index, value) {
+
+  window.dataPenerima[index].nama =
+    value;
+
+  generateCaptionHarian();
+
+}
+
 function togglePenerimaChip(index) {
 
   window.dataPenerima[index].hitungPenerima =

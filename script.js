@@ -2380,12 +2380,23 @@ function kirimSpreadsheet() {
   })
   .then(res => res.text())
   .then(() => {
-    alert("Berhasil kirim laporan");
-  })
-  .catch(err => {
-    console.error(err);
-    alert("Gagal kirim");
+  Swal.fire({
+    title: "Berhasil!",
+    text: "Laporan berhasil dikirim",
+    icon: "success",
+    confirmButtonText: "OK"
   });
+})
+.catch(err => {
+  console.error(err);
+
+  Swal.fire({
+    title: "Gagal!",
+    text: "Laporan gagal dikirim",
+    icon: "error",
+    confirmButtonText: "Tutup"
+  });
+});
 }
   
     function debounce(fn, delay = 150) {

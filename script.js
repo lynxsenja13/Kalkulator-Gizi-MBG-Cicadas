@@ -2139,13 +2139,25 @@ function kirimSpreadsheet() {
   })
 })
 .then(() => {
-  alert("✅ Berhasil dikirim!");
+
+  Swal.fire({
+    title: "Berhasil!",
+    text: "Laporan berhasil dikirim",
+    icon: "success",
+    draggable: true
+  });
+
 })
 .catch(err => {
+
   console.error(err);
-  alert("❌ Gagal kirim");
-});
-  
+
+  Swal.fire({
+    icon: "error",
+    title: "Oops...",
+    text: "Laporan gagal dikirim!",
+    footer: "Periksa koneksi atau server Apps Script"
+  });
 }
   
   function kirimLaporan(data) {

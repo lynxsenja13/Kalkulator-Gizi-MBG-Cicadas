@@ -1372,21 +1372,6 @@ function generateListPenerima() {
     
     const jumlahMakan =
       hitungJumlahMakan();
-    
-    const daftarPenerima =
-      generateListPenerima();
-    const { data } = hitungPenerimaFinal();
-  
-  // 🔥 TOTAL KHUSUS POIN D (HANYA D3–D6)
-  const totalD =
-    (data["SD YAS"] || 0) +
-    (data["SMP YAS"] || 0) +
-    (data["SMA YAS"] || 0) +
-    (data["SD Awi Gombong"] || 0);
-  
-  // 🔥 TOTAL MAKAN (SEMUA)
-  const totalSemua = Object.values(data).reduce((a,b)=>a+b,0);
-    const tanggal = getTanggalLengkap();
   
   let menuList = ambilMenuUntukLaporan().join("\n");
     
@@ -1410,9 +1395,9 @@ function generateListPenerima() {
   
   Jumlah makan : *${jumlahMakan}* porsi.
   
-  E. Menu Makan hari ini ${tanggalHariIni}
-  
-  ${menuMakan}
+  E. Menu Makan hari ini ${tanggal}
+
+  ${menuList}
   
   Demikian kami laporkan.
   Dokumentasi terlampir.

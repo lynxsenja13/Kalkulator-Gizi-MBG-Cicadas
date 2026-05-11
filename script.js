@@ -22,7 +22,10 @@
     SNACK: {}
   };
 
-  window.dataPenerima = [
+  window.dataPenerima =
+  JSON.parse(
+    localStorage.getItem("dataPenerima")
+  ) || [
 
   {
     nama: "BALITA",
@@ -3034,5 +3037,33 @@ function syncTextareaToData() {
   });
 
   renderEditorPenerima();
+
+}
+
+function togglePengaturanPenerima() {
+
+  const panel =
+    document.getElementById("pengaturanPenerima");
+
+  if (panel.style.display === "none") {
+
+    panel.style.display = "block";
+
+  } else {
+
+    panel.style.display = "none";
+
+  }
+
+}
+
+function simpanPengaturanPenerima() {
+
+  localStorage.setItem(
+    "dataPenerima",
+    JSON.stringify(window.dataPenerima)
+  );
+
+  alert("Pengaturan penerima berhasil disimpan.");
 
 }

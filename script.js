@@ -1367,13 +1367,23 @@ function generateListPenerima() {
     return { data, total };
   }
   function generateCaptionHarian() {
-    const jumlahPenerima =
-      hitungJumlahPenerima();
-    
-    const jumlahMakan =
-      hitungJumlahMakan();
-  
-  let menuList = ambilMenuUntukLaporan().join("\n");
+
+  const jumlahPenerima =
+    hitungJumlahPenerima();
+
+  const jumlahMakan =
+    hitungJumlahMakan();
+
+  const daftarPenerima =
+    generateListPenerima();
+
+  // 🔥 WAJIB ADA
+  const tanggal =
+    document.getElementById("tanggalText").innerText;
+
+  // 🔥 MENU
+  const menuList =
+    ambilMenuUntukLaporan().join("\n");
     
   const caption = `Yth. Dandim 0618/Kota Bandung
   Cc. Pasiter Kodim 0618/Kota Bandung

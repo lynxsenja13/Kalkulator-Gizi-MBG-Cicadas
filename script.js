@@ -3127,3 +3127,82 @@ function simpanPengaturanPenerima() {
   alert("Pengaturan penerima berhasil disimpan.");
 
 }
+
+function syncTextareaToDataTemporary() {
+
+  const textarea =
+    document.getElementById("captionOutput");
+
+  const text =
+    textarea.value;
+
+  const regex =
+    /^\d+\.\s(.*?)\s=\s(\d+)/gm;
+
+  const hasil = [];
+
+  let match;
+
+  while ((match = regex.exec(text)) !== null) {
+
+    hasil.push({
+
+      nama: match[1].trim(),
+
+      jumlah: Number(match[2]) || 0,
+
+      // default sementara
+      hitungPenerima: true,
+      hitungMakan: true
+
+    });
+
+  }
+
+  // JIKA ADA HASIL
+  if (hasil.length > 0) {
+
+    // TEMP ONLY
+    window.tempDataPenerima = hasil;
+
+    updateTotalDariTextarea();
+
+  }
+
+}
+
+function updateTotalDariTextarea() {
+
+  const data =
+    window.tempDataPenerima || [];
+
+  // TOTAL PENERIMA
+  const jumlahPenerima =
+    data.reduce((a,b)=>a+b.jumlah,0);
+
+  // TOTAL MAKAN
+  const jumlahMakan =
+    data.reduce((a,b)=>a+b.jumlah,0);
+
+  let text =
+    document.getElementById("captionOutput").value;
+
+  // UPDATE TOTAL
+  text = text.replace(
+
+    /Jumlah penerima sebanyak \*?\d+\*? orang\.?/,
+
+    `Jumlah penerima sebanyak *${jumlahPenerima}* orang.`
+  );
+
+  text = text.replace(
+
+    /Jumlah makan : \*?\d+\*? porsi\.?/,
+
+    `Jumlah makan : *${jumlahMakan}* porsi.`
+  );
+
+  document.getElementById("captionOutput").value =
+    text;
+
+}

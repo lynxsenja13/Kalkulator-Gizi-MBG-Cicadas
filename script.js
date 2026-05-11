@@ -1,4 +1,5 @@
   //Berhasil
+  let textareaTimer;
   
   let bahanMaster = {
     OMPRENGAN: {},
@@ -3204,5 +3205,17 @@ function updateTotalDariTextarea() {
 
   document.getElementById("captionOutput").value =
     text;
+
+}
+
+function handleTextareaRealtime() {
+
+  clearTimeout(textareaTimer);
+
+  textareaTimer = setTimeout(()=>{
+
+    syncTextareaToDataTemporary();
+
+  }, 500);
 
 }

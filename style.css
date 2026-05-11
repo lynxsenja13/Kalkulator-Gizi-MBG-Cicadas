@@ -2464,3 +2464,16 @@ button:active {
   gap:12px;
   margin-top:20px;
 }
+
+.pengaturan-content{
+
+  max-height:0;
+
+  overflow:hidden;
+
+  padding:0 20px;
+
+  transition:
+    max-height 0.35s ease,
+    padding 0.35s ease;
+}

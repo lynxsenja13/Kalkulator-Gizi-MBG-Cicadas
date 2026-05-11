@@ -2158,6 +2158,8 @@ function kirimSpreadsheet() {
     text: "Laporan gagal dikirim!",
     footer: "Periksa koneksi atau server Apps Script"
   });
+
+});
 }
   
   function kirimLaporan(data) {

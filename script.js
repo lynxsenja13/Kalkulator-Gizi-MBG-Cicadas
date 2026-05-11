@@ -1601,110 +1601,113 @@ function generateListPenerima() {
   }
   
   function prosesLaporan() {
-  
-    // 🔥 SYNC KE STATE UTAMA
-    kategoriLibur["Balita"] = document.getElementById("liburBalita").checked;
-    kategoriLibur["Bumil & Busui"] = document.getElementById("liburBumil").checked;
-    kategoriLibur["SD 1-3"] = document.getElementById("liburSD").checked;
-    kategoriLibur["SD 4-6"] = document.getElementById("liburSD").checked;
-    kategoriLibur["SMP"] = document.getElementById("liburSMP").checked;
-    kategoriLibur["SMA"] = document.getElementById("liburSMA").checked;
-  
-    window.kategoriLibur = kategoriLibur;
-  
-    // =========================
-    // AMBIL STATUS LIBUR
-    // =========================
-    const liburBalita = document.getElementById("libur_balita").checked;
-    const liburBumil = document.getElementById("libur_bumil").checked;
-    const  liburAwi = document.getElementById("libur_awig").checked;
-    const liburYas = document.getElementById("libur_sdyas").checked;
-    const liburSMP = document.getElementById("libur_smpyas").checked;
-    const liburSMA = document.getElementById("libur_smayas").checked;
-  
-    // =========================
-    // ANGKA DEFAULT (UBAH JIKA PERLU)
-    // =========================
-    const { data, total } = hitungPenerimaFinal();
-  
-    let D1 = data["BALITA"];
-    let D2 = data["BUMIL & BUSUI"];
-    let D3 = data["SD YAS"];
-    let D4 = data["SMP YAS"];
-    let D5 = data["SMA YAS"];
-    let D6 = data["SD Awi Gombong"];
-    let D7 = data["Guru & Tendik SD YAS"];
-    let D8 = data["Guru & Tendik SMP YAS"];
-    let D9 = data["Guru & Tendik SMA YAS"];
-    let  D10 = data["Guru & Tendik SD Awi Gombong"];
-    let D11 = data["PIC POSYANDU"];
-  
-    // =========================
-    // TOTAL PENERIMA (POIN D)
-    // =========================
-    const totalPenerima =
-    D1 + D2 + D3 + D4 + D5 + D6 + D7 + D8 + D9 + D10 + D11;
-  
-    const jumlahMakan = totalPenerima;
-  
-    // =========================
-    // AMBIL MENU
-    // =========================
-    const menuList = ambilDaftarMenu();
-  
-    // =========================
-    // FORMAT TANGGAL
-    // =========================
-    const tanggal = getTanggalLengkap();
-    
-    // =========================
-    // BUAT TEKS LAPORAN
-    // =========================
+
+  // =========================
+  // SYNC STATUS LIBUR
+  // =========================
+
+  kategoriLibur["Balita"] =
+    document.getElementById("libur_balita").checked;
+
+  kategoriLibur["Bumil & Busui"] =
+    document.getElementById("libur_bumil").checked;
+
+  kategoriLibur["SD YAS"] =
+    document.getElementById("libur_sdyas").checked;
+
+  kategoriLibur["SMP YAS"] =
+    document.getElementById("libur_smpyas").checked;
+
+  kategoriLibur["SMA YAS"] =
+    document.getElementById("libur_smayas").checked;
+
+  kategoriLibur["SDN Awi Gombong"] =
+    document.getElementById("libur_awig").checked;
+
+  window.kategoriLibur = kategoriLibur;
+
+  // =========================
+  // TOTAL DINAMIS
+  // =========================
+
+  const jumlahPenerima =
+    hitungJumlahPenerima();
+
+  const jumlahMakan =
+    hitungJumlahMakan();
+
+  // =========================
+  // LIST PENERIMA OTOMATIS
+  // =========================
+
+  const daftarPenerima =
+    generateListPenerima();
+
+  // =========================
+  // MENU
+  // =========================
+
+  const menuList =
+    ambilDaftarMenu().join("\n");
+
+  // =========================
+  // TANGGAL
+  // =========================
+
+  const tanggal =
+    document.getElementById("tanggalText").innerText;
+
+  // =========================
+  // TEMPLATE LAPORAN
+  // =========================
+
   const laporanText = `Yth. Dandim 0618/Kota Bandung
-  Cc. Pasiter Kodim 0618/Kota Bandung
-  
-  Selamat Pagi Komandan,
-  Izin melaporkan, pada hari ${tanggalStr} telah dilaksanakan kegiatan Pembagian Makan Bergizi Gratis operasional Unit SPPG Khusus/Hybrid.
-  
-  A. SPPG : Yayasan Pangan Mandiri Barokah Dapur Cicadas 01
-  B. Lokasi : Jalan Brigjen Katamso RT. 10 RW. 13 Kel. Cicadas Kec. Cibeunying Kidul Kota Bandung.
-  C. Personel :
-  1. Kepala SPPG/No tlp : Tata Dhea Wimala/087892330960
-  2. Ahli Gizi/No tlp : Aliyah Khairunnisa Syafitri/089664825252
-  3. Akuntan/No tlp : Febrianto/082121312500
-  4. Jml Karyawan : 44
-  
-  D. Jumlah penerima sebanyak ${totalPenerima} orang
-  1. BALITA = ${D1}
-  2. BUMIL & BUSUI = ${D2}
-  3. SD YAS = ${D3}
-  4. SMP YAS = ${D4}
-  5. SMA YAS = ${D5}
-  6. SDN Awi Gombong = ${D6}
-  7. Guru & Tendik SD YAS = ${D7}
-  8. Guru & Tendik SMP YAS = ${D8}
-  9. Guru & Tendik SMA YAS = ${D9}
-  10. Guru & Tendik SD Awi Gombong = ${D10}
-  11. PIC POSYANDU = ${D11}
-  
-  Jumlah makan : ${jumlahMakan} porsi.
-  
-  E. Menu Makan hari ini ${tanggalStr}
-  ${menuList}
-  
-  Demikian kami laporkan.
-  Dokumentasi terlampir.
-  `.trim();
-  
-    // tampilkan ke box
-    document.getElementById("hasilLaporan").value = laporanText;
-  
-    // simpan global untuk copy WA
-    window.lastLaporanText = laporanText;
-  
-    // tutup modal
-    tutupModalLibur();
-  }
+Cc. Pasiter Kodim 0618/Kota Bandung
+
+Selamat Pagi Komandan,
+Izin melaporkan, pada hari ${tanggal} telah dilaksanakan kegiatan Pembagian Makan Bergizi Gratis operasional Unit SPPG Khusus/Hybrid.
+
+A. SPPG : Yayasan Pangan Mandiri Barokah Dapur Cicadas 01
+B. Lokasi : Jalan Brigjen Katamso RT. 10 RW. 13 Kel. Cicadas Kec. Cibeunying Kidul Kota Bandung.
+
+C. Personel :
+1. Kepala SPPG/No tlp : Tata Dhea Wimala/087892330960
+2. Ahli Gizi/No tlp : Aliyah Khairunnisa Syafitri/089664825252
+3. Akuntan/No tlp : Febrianto/082121312500
+4. Jml Karyawan : 44
+
+D. Jumlah penerima sebanyak *${jumlahPenerima}* orang.
+
+${daftarPenerima}
+
+Jumlah makan : *${jumlahMakan}* porsi.
+
+E. Menu Makan hari ini ${tanggal}
+
+${menuList}
+
+Demikian kami laporkan.
+Dokumentasi terlampir.
+`.trim();
+
+  // =========================
+  // OUTPUT
+  // =========================
+
+  const output =
+    document.getElementById("captionOutput");
+
+  output.value = laporanText;
+
+  autoResizeTextarea(output);
+
+  // GLOBAL
+  window.lastLaporanText = laporanText;
+
+  // TUTUP MODAL
+  tutupModalLibur();
+
+}
   
   function ambilDaftarMenu() {
     const items = document.querySelectorAll(".menu-item-input");

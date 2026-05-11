@@ -2333,3 +2333,134 @@ button:active {
   pointer-events: none; /* 🔥 penting */
   z-index: 1;
 }
+
+.pengaturan-card{
+  margin-bottom:20px;
+  border-radius:20px;
+  overflow:hidden;
+
+  background:rgba(255,255,255,0.05);
+
+  border:1px solid rgba(255,255,255,0.08);
+
+  backdrop-filter:blur(10px);
+
+  box-shadow:
+    0 8px 24px rgba(0,0,0,0.25);
+}
+
+/* TOGGLE */
+.pengaturan-toggle{
+  width:100%;
+
+  border:none;
+  background:transparent;
+
+  padding:18px 20px;
+
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+
+  cursor:pointer;
+
+  color:white;
+
+  font-size:15px;
+  font-weight:600;
+
+  transition:0.25s;
+}
+
+.pengaturan-toggle:hover{
+  background:rgba(255,255,255,0.04);
+}
+
+.pengaturan-left{
+  display:flex;
+  align-items:center;
+  gap:12px;
+}
+
+.gear-icon{
+  font-size:18px;
+}
+
+/* ARROW */
+.pengaturan-arrow{
+  transition:0.3s;
+}
+
+.pengaturan-arrow.rotate{
+  transform:rotate(180deg);
+}
+
+/* CONTENT */
+.pengaturan-content{
+
+  max-height:0;
+  overflow:hidden;
+
+  transition:
+    max-height 0.35s ease,
+    padding 0.35s ease;
+
+  padding:0 20px;
+}
+
+/* ACTIVE */
+.pengaturan-content.show{
+  max-height:1500px;
+  padding:20px;
+}
+
+/* ITEM */
+.penerima-item{
+
+  display:grid;
+
+  grid-template-columns:
+    1.8fr
+    100px
+    auto
+    auto
+    auto;
+
+  gap:10px;
+
+  margin-bottom:12px;
+}
+
+.penerima-item input[type="text"],
+.penerima-item input[type="number"]{
+
+  background:rgba(255,255,255,0.06);
+
+  border:none;
+
+  border-radius:12px;
+
+  padding:12px;
+
+  color:white;
+
+  font-size:14px;
+}
+
+.penerima-item label{
+
+  display:flex;
+  align-items:center;
+  gap:6px;
+
+  font-size:12px;
+
+  color:#ddd;
+}
+
+/* ACTION */
+.pengaturan-action{
+  display:flex;
+  gap:12px;
+  margin-top:20px;
+}

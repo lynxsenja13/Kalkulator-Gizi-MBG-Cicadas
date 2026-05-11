@@ -334,16 +334,34 @@ window.APP_READY = true;
   <!-- EDITOR PENERIMA -->
   <!-- ========================= -->
 
-  <div class="editor-wrapper">
+  <!-- TOGGLE -->
+<button class="btn-secondary"
+        onclick="togglePengaturanPenerima()">
+  ⚙️ Pengaturan Penerima
+</button>
 
-    <h4>⚙️ Pengaturan Penerima</h4>
+<!-- WRAPPER -->
+<div id="pengaturanPenerima"
+     class="editor-wrapper"
+     style="display:none;">
 
-    <div id="editorPenerima"></div>
+  <h4>⚙️ Pengaturan Penerima</h4>
+
+  <div id="editorPenerima"></div>
+
+  <div class="action-row">
 
     <button class="btn-secondary"
             onclick="tambahPenerima()">
       + Tambah Penerima
     </button>
+
+    <button class="btn-success"
+            onclick="simpanPengaturanPenerima()">
+      💾 Simpan Permanen
+    </button>
+
+  </div>
 
     <button class="btn-success"
             onclick="syncTextareaToData()">

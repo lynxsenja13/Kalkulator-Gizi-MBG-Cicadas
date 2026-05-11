@@ -2883,56 +2883,101 @@ function updateJumlahLaporan() {
 
 function renderEditorPenerima() {
 
-  const container =
+  const wrapper =
     document.getElementById("editorPenerima");
 
-  container.innerHTML = "";
+  wrapper.innerHTML =
+    window.dataPenerima.map((item,index)=>`
 
-  window.dataPenerima.forEach((item, index) => {
+    <div class="penerima-item">
 
-    container.innerHTML += `
+      <input
+        type="text"
+        value="${item.nama}"
 
-      <div class="penerima-item">
+        onchange="
+          updateNamaPenerima(
+            ${index},
+            this.value
+          )
+        "
+      >
 
-        <input
-          type="text"
-          value="${item.nama}"
-          onchange="ubahNama(${index}, this.value)"
-        >
+      <input
+        type="number"
+        value="${item.jumlah}"
 
-        <input
-          type="number"
-          value="${item.jumlah}"
-          onchange="ubahJumlah(${index}, this.value)"
-        >
+        onchange="
+          updateJumlahPenerima(
+            ${index},
+            this.value
+          )
+        "
+      >
 
-        <label>
-          Hitung Penerima
-          <input
-            type="checkbox"
-            ${item.hitungPenerima ? "checked" : ""}
-            onchange="togglePenerima(${index}, this.checked)"
-          >
-        </label>
+      <!-- 👥 -->
+      <button
+        class="toggle-chip
+        ${item.hitungPenerima ? 'active' : ''}"
 
-        <label>
-          Hitung Makan
-          <input
-            type="checkbox"
-            ${item.hitungMakan ? "checked" : ""}
-            onchange="toggleMakan(${index}, this.checked)"
-          >
-        </label>
+        onclick="
+          togglePenerimaChip(${index})
+        ">
 
-        <button onclick="hapusPenerima(${index})">
-          Hapus
-        </button>
+        👥
 
-      </div>
+      </button>
 
-    `;
+      <!-- 🍽 -->
+      <button
+        class="toggle-chip
+        ${item.hitungMakan ? 'active' : ''}"
 
-  });
+        onclick="
+          toggleMakanChip(${index})
+        ">
+
+        🍽
+
+      </button>
+
+      <!-- HAPUS -->
+      <button
+        class="btn-delete-mini"
+
+        onclick="
+          hapusPenerima(${index})
+        ">
+
+        ✕
+
+      </button>
+
+    </div>
+
+  `).join("");
+
+}
+
+function togglePenerimaChip(index) {
+
+  window.dataPenerima[index].hitungPenerima =
+    !window.dataPenerima[index].hitungPenerima;
+
+  renderEditorPenerima();
+
+  generateCaptionHarian();
+
+}
+
+function toggleMakanChip(index) {
+
+  window.dataPenerima[index].hitungMakan =
+    !window.dataPenerima[index].hitungMakan;
+
+  renderEditorPenerima();
+
+  generateCaptionHarian();
 
 }
 

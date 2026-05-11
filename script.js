@@ -3042,18 +3042,15 @@ function syncTextareaToData() {
 
 function togglePengaturanPenerima() {
 
-  const panel =
+  const content =
     document.getElementById("pengaturanPenerima");
 
-  if (panel.style.display === "none") {
+  const arrow =
+    document.getElementById("pengaturanArrow");
 
-    panel.style.display = "block";
+  content.classList.toggle("show");
 
-  } else {
-
-    panel.style.display = "none";
-
-  }
+  arrow.classList.toggle("rotate");
 
 }
 

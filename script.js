@@ -21,6 +21,119 @@
     OMPRENGAN: {},
     SNACK: {}
   };
+
+  window.dataPenerima = [
+
+  {
+    nama: "BALITA",
+    jumlah: 211,
+    hitungPenerima: false,
+    hitungMakan: true
+  },
+
+  {
+    nama: "BUMIL & BUSUI",
+    jumlah: 125,
+    hitungPenerima: false,
+    hitungMakan: true
+  },
+
+  {
+    nama: "SD YAS",
+    jumlah: 186,
+    hitungPenerima: true,
+    hitungMakan: true
+  },
+
+  {
+    nama: "SMP YAS",
+    jumlah: 630,
+    hitungPenerima: true,
+    hitungMakan: true
+  },
+
+  {
+    nama: "SMA YAS",
+    jumlah: 364,
+    hitungPenerima: true,
+    hitungMakan: true
+  },
+
+  {
+    nama: "SDN Awi Gombong",
+    jumlah: 1016,
+    hitungPenerima: true,
+    hitungMakan: true
+  },
+
+  {
+    nama: "Guru & Tendik SD YAS",
+    jumlah: 17,
+    hitungPenerima: false,
+    hitungMakan: true
+  },
+
+  {
+    nama: "Guru & Tendik SMP YAS",
+    jumlah: 35,
+    hitungPenerima: false,
+    hitungMakan: true
+  },
+
+  {
+    nama: "Guru & Tendik SMA YAS",
+    jumlah: 37,
+    hitungPenerima: false,
+    hitungMakan: true
+  },
+
+  {
+    nama: "Guru & Tendik SD Awi Gombong",
+    jumlah: 62,
+    hitungPenerima: false,
+    hitungMakan: true
+  },
+
+  {
+    nama: "PIC POSYANDU",
+    jumlah: 5,
+    hitungPenerima: false,
+    hitungMakan: true
+  }
+
+];
+
+function hitungJumlahPenerima() {
+
+  return window.dataPenerima
+    .filter(item => item.hitungPenerima)
+    .reduce((sum, item) => {
+      return sum + Number(item.jumlah || 0);
+    }, 0);
+
+}
+
+function hitungJumlahMakan() {
+
+  return window.dataPenerima
+    .filter(item => item.hitungMakan)
+    .reduce((sum, item) => {
+      return sum + Number(item.jumlah || 0);
+    }, 0);
+
+}
+
+function generateListPenerima() {
+
+  return window.dataPenerima
+    .map((item, index) => {
+
+      return `${index + 1}. ${item.nama} = ${item.jumlah}`;
+
+    })
+    .join("\n");
+
+}
   
   const STATE = {
     modeMenu:"OMPRENGAN",
@@ -1253,6 +1366,14 @@
     return { data, total };
   }
   function generateCaptionHarian() {
+    const jumlahPenerima =
+      hitungJumlahPenerima();
+    
+    const jumlahMakan =
+      hitungJumlahMakan();
+    
+    const daftarPenerima =
+      generateListPenerima();
     const { data } = hitungPenerimaFinal();
   
   // 🔥 TOTAL KHUSUS POIN D (HANYA D3–D6)
@@ -1282,26 +1403,19 @@
   3. Akuntan/No tlp : Febrianto/082121312500
   4. Jml Karyawan : 44
   
-  D. Jumlah penerima sebanyak *${totalD}* orang.
-  1. BALITA = ${data["BALITA"]}
-  2. BUMIL & BUSUI = ${data["BUMIL & BUSUI"]}
-  3. SD YAS = ${data["SD YAS"]}
-  4. SMP YAS = ${data["SMP YAS"]}
-  5. SMA YAS = ${data["SMA YAS"]}
-  6. SDN Awi Gombong = ${data["SD Awi Gombong"]}
-  7. Guru & Tendik SD YAS = ${data["Guru & Tendik SD YAS"]}
-  8. Guru & Tendik SMP YAS = ${data["Guru & Tendik SMP YAS"]}
-  9. Guru & Tendik SMA YAS = ${data["Guru & Tendik SMA YAS"]}
-  10. Guru & Tendik SD Awi Gombong = ${data["Guru & Tendik SD Awi Gombong"]}
-  11. PIC POSYANDU = ${data["PIC POSYANDU"]}
+  D. Jumlah penerima sebanyak *${jumlahPenerima}* orang.
+
+  ${daftarPenerima}
   
-  Jumlah makan : *${totalSemua}* porsi.
+  Jumlah makan : *${jumlahMakan}* porsi.
   
-  E. Menu Makan hari ini ${tanggal}
-  ${menuList}
+  E. Menu Makan hari ini ${tanggalHariIni}
+  
+  ${menuMakan}
   
   Demikian kami laporkan.
   Dokumentasi terlampir.
+  
   `;
   
     document.getElementById("captionOutput").value = caption.trim();
@@ -2761,5 +2875,164 @@ function updateJumlahLaporan() {
   const newCursor = cursorPos + diff;
 
   textarea.setSelectionRange(newCursor, newCursor);
+
+}
+
+function renderEditorPenerima() {
+
+  const container =
+    document.getElementById("editorPenerima");
+
+  container.innerHTML = "";
+
+  window.dataPenerima.forEach((item, index) => {
+
+    container.innerHTML += `
+
+      <div class="penerima-item">
+
+        <input
+          type="text"
+          value="${item.nama}"
+          onchange="ubahNama(${index}, this.value)"
+        >
+
+        <input
+          type="number"
+          value="${item.jumlah}"
+          onchange="ubahJumlah(${index}, this.value)"
+        >
+
+        <label>
+          Hitung Penerima
+          <input
+            type="checkbox"
+            ${item.hitungPenerima ? "checked" : ""}
+            onchange="togglePenerima(${index}, this.checked)"
+          >
+        </label>
+
+        <label>
+          Hitung Makan
+          <input
+            type="checkbox"
+            ${item.hitungMakan ? "checked" : ""}
+            onchange="toggleMakan(${index}, this.checked)"
+          >
+        </label>
+
+        <button onclick="hapusPenerima(${index})">
+          Hapus
+        </button>
+
+      </div>
+
+    `;
+
+  });
+
+}
+
+function ubahNama(index, value) {
+
+  window.dataPenerima[index].nama = value;
+
+  generateCaptionHarian();
+
+}
+
+function ubahJumlah(index, value) {
+
+  window.dataPenerima[index].jumlah =
+    Number(value);
+
+  generateCaptionHarian();
+
+}
+
+function togglePenerima(index, checked) {
+
+  window.dataPenerima[index]
+    .hitungPenerima = checked;
+
+  generateCaptionHarian();
+
+}
+
+function toggleMakan(index, checked) {
+
+  window.dataPenerima[index]
+    .hitungMakan = checked;
+
+  generateCaptionHarian();
+
+}
+
+function tambahPenerima() {
+
+  window.dataPenerima.push({
+
+    nama: "PENERIMA BARU",
+    jumlah: 0,
+    hitungPenerima: false,
+    hitungMakan: true
+
+  });
+
+  renderEditorPenerima();
+
+  generateCaptionHarian();
+
+}
+
+function hapusPenerima(index) {
+
+  window.dataPenerima.splice(index, 1);
+
+  renderEditorPenerima();
+
+  generateCaptionHarian();
+
+}
+
+function syncTextareaToData() {
+
+  const textarea =
+    document.getElementById("captionOutput");
+
+  const text = textarea.value;
+
+  const regex =
+    /^\d+\.\s(.*?)\s=\s(\d+)/gm;
+
+  const hasil = [];
+
+  let match;
+
+  while ((match = regex.exec(text)) !== null) {
+
+    hasil.push({
+
+      nama: match[1].trim(),
+      jumlah: Number(match[2])
+
+    });
+
+  }
+
+  window.dataPenerima = hasil.map(item => {
+
+    return {
+
+      nama: item.nama,
+      jumlah: item.jumlah,
+      hitungPenerima: true,
+      hitungMakan: true
+
+    };
+
+  });
+
+  renderEditorPenerima();
 
 }

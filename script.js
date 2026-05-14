@@ -1598,55 +1598,6 @@ function generateListPenerima() {
     }
   }
   
-  function copyLaporanWA() {
-
-  const text = document.getElementById("hasilLaporan").value;
-
-  if (!text) {
-
-    Swal.fire({
-      toast: true,
-      position: "bottom",
-      icon: "warning",
-      title: "Generate laporan dulu",
-      showConfirmButton: false,
-      timer: 1500
-    });
-
-    return;
-  }
-
-  navigator.clipboard.writeText(text)
-    .then(() => {
-
-      Swal.fire({
-        toast: true,
-        position: "bottom",
-        icon: "success",
-        title: "Berhasil disalin",
-        showConfirmButton: false,
-        timer: 1500,
-        timerProgressBar: true
-      });
-
-    })
-    .catch(err => {
-
-      console.error(err);
-
-      Swal.fire({
-        toast: true,
-        position: "bottom",
-        icon: "error",
-        title: "Gagal menyalin",
-        showConfirmButton: false,
-        timer: 2000
-      });
-
-    });
-
-}
-  
   function prosesLaporan() {
 
   // =========================
@@ -1770,26 +1721,53 @@ Dokumentasi terlampir.
   }
   
   function copyLaporanWA() {
-    if (!window.lastLaporanText) {
-      Swal.fire({
-        icon: "warning",
-        title: "Belum Ada Laporan",
-        text: "Silakan generate laporan terlebih dahulu"
-      });
-      return;
-    }
-  
-    navigator.clipboard.writeText(window.lastLaporanText);
-   Swal.fire({
+
+  const text = document.getElementById("hasilLaporan").value;
+
+  if (!text) {
+
+    Swal.fire({
       toast: true,
       position: "bottom",
-      icon: "success",
-      title: "Berhasil disalin",
+      icon: "warning",
+      title: "Generate laporan dulu",
       showConfirmButton: false,
-      timer: 1500,
-      timerProgressBar: true
+      timer: 1500
     });
+
+    return;
   }
+
+  navigator.clipboard.writeText(text)
+    .then(() => {
+
+      Swal.fire({
+        toast: true,
+        position: "bottom",
+        icon: "success",
+        title: "Berhasil disalin",
+        showConfirmButton: false,
+        timer: 1500,
+        timerProgressBar: true
+      });
+
+    })
+    .catch(err => {
+
+      console.error(err);
+
+      Swal.fire({
+        toast: true,
+        position: "bottom",
+        icon: "error",
+        title: "Gagal menyalin",
+        showConfirmButton: false,
+        timer: 2000
+      });
+
+    });
+
+}
   
   function tambahMenuInput() {
     const container = document.getElementById("menuContainer");

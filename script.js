@@ -1605,13 +1605,10 @@ window.copyCaptionWA = function () {
   navigator.clipboard.writeText(hasilDiv.innerText);
 
   Swal.fire({
-    toast: true,
-    position: "bottom",
+    title: "Berhasil disalin!",
+    text: "Caption WhatsApp sudah dicopy",
     icon: "success",
-    title: "Berhasil disalin",
-    showConfirmButton: false,
-    timer: 1500,
-    timerProgressBar: true
+    draggable: true
   });
 
 };

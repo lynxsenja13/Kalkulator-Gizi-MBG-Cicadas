@@ -1600,12 +1600,36 @@ function generateListPenerima() {
 
 function copyCaptionWA() {
 
+  const textarea = document.getElementById("hasilLaporan");
+
+  if (!textarea || !textarea.value.trim()) {
+
+    Swal.fire({
+      toast: true,
+      position: "bottom",
+      icon: "warning",
+      title: "Generate laporan dulu",
+      showConfirmButton: false,
+      timer: 1500
+    });
+
+    return;
+  }
+
+  navigator.clipboard.writeText(textarea.value);
+
   Swal.fire({
+    toast: true,
+    position: "bottom",
     icon: "success",
-    title: "TEST SWEET ALERT"
+    title: "Berhasil disalin",
+    showConfirmButton: false,
+    timer: 1500,
+    timerProgressBar: true
   });
 
 }
+
   function prosesLaporan() {
 
   // =========================

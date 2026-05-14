@@ -1598,12 +1598,14 @@ function generateListPenerima() {
     }
   }
 
- function copyCaptionWA() {
+function copyCaptionWA() {
 
-  alert("TEST FUNCTION MASUK");
+  Swal.fire({
+    icon: "success",
+    title: "TEST SWEET ALERT"
+  });
 
 }
-
   function prosesLaporan() {
 
   // =========================

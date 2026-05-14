@@ -2141,44 +2141,11 @@ document.addEventListener("keydown", function (e) {
 
 });
   
-window.addEventListener("load", () => {
+window.addEventListener("load",()=>{
 
-  Swal.fire({
-    title: "Apakah yakin?",
-    text: "Halaman akan dimuat ulang",
-    icon: "warning",
-    showCancelButton: true,
-    confirmButtonColor: "#3085d6",
-    cancelButtonColor: "#d33",
-    confirmButtonText: "Lanjutkan",
-    cancelButtonText: "Batal"
-  }).then((result) => {
+  loadDataPenerima();
 
-    if (result.isConfirmed) {
-
-      const intro = document.getElementById("intro");
-
-      setTimeout(() => {
-        intro.style.transition = "opacity 1s ease";
-        intro.style.opacity = "0";
-
-        setTimeout(() => {
-          intro.style.display = "none";
-        }, 1000);
-
-      }, 2000);
-
-      Swal.fire({
-        title: "Berhasil!",
-        text: "Halaman berhasil dimuat",
-        icon: "success",
-        timer: 1500,
-        showConfirmButton: false
-      });
-
-    }
-
-  });
+  renderEditorPenerima();
 
 });
   

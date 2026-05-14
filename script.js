@@ -3200,7 +3200,12 @@ function simpanPengaturanPenerima() {
     JSON.stringify(window.dataPenerima)
   );
 
-  alert("Pengaturan penerima berhasil disimpan.");
+  Swal.fire({
+  title: "Berhasil!",
+  text: "Pengaturan penerima berhasil disimpan.",
+  icon: "success",
+  confirmButtonText: "OK"
+});
 
 }
 

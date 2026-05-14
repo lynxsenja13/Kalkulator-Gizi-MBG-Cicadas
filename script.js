@@ -2102,7 +2102,6 @@ function blokGizi(judul, data) {
     e.returnValue = '';
   });
   
-  <script>
 window.addEventListener("load", () => {
 
   Swal.fire({

@@ -1598,70 +1598,9 @@ function generateListPenerima() {
     }
   }
 
-  function copyCaptionWA() {
+ function copyCaptionWA() {
 
-  console.log("Tombol copy diklik");
-
-  const textarea = document.getElementById("hasilLaporan");
-
-  if (!textarea) {
-
-    console.error("Element hasilLaporan tidak ditemukan");
-
-    Swal.fire({
-      icon: "error",
-      title: "Textarea tidak ditemukan"
-    });
-
-    return;
-  }
-
-  const text = textarea.value;
-
-  if (!text.trim()) {
-
-    Swal.fire({
-      toast: true,
-      position: "bottom",
-      icon: "warning",
-      title: "Generate laporan dulu",
-      showConfirmButton: false,
-      timer: 1500
-    });
-
-    return;
-  }
-
-  navigator.clipboard.writeText(text)
-    .then(() => {
-
-      console.log("Berhasil copy");
-
-      Swal.fire({
-        toast: true,
-        position: "bottom",
-        icon: "success",
-        title: "Berhasil disalin",
-        showConfirmButton: false,
-        timer: 1500,
-        timerProgressBar: true
-      });
-
-    })
-    .catch(err => {
-
-      console.error("Clipboard error:", err);
-
-      Swal.fire({
-        toast: true,
-        position: "bottom",
-        icon: "error",
-        title: "Gagal menyalin",
-        showConfirmButton: false,
-        timer: 2000
-      });
-
-    });
+  alert("TEST FUNCTION MASUK");
 
 }
 

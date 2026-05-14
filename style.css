@@ -2421,18 +2421,41 @@ button:active {
 /* ITEM */
 .penerima-item{
 
-  display:grid;
+  display:flex;
 
-  grid-template-columns:
-    1.8fr
-    100px
-    auto
-    auto
-    auto;
+  align-items:center;
 
   gap:10px;
 
   margin-bottom:12px;
+
+  padding:12px;
+
+  border-radius:16px;
+
+  background:
+    rgba(255,255,255,0.04);
+
+  flex-wrap:wrap;
+}
+
+.penerima-item input[type="text"]{
+
+  flex:1;
+
+  min-width:180px;
+}
+
+.penerima-item input[type="number"]{
+
+  width:90px;
+}
+
+.toggle-group{
+
+  display:flex;
+
+  gap:8px;
 }
 
 .penerima-item input[type="text"],
@@ -2480,6 +2503,13 @@ button:active {
   transition:
     max-height 0.35s ease,
     padding 0.35s ease;
+}
+
+.pengaturan-content.show{
+
+  max-height:10000px;
+
+  padding:20px;
 }
 
 .toggle-chip{
@@ -2696,4 +2726,39 @@ button:active {
 
   display:flex;
   flex-direction:column;
+}
+
+@media (max-width:768px){
+
+  .penerima-item{
+
+    flex-direction:column;
+
+    align-items:stretch;
+  }
+
+  .penerima-item input[type="text"],
+
+  .penerima-item input[type="number"]{
+
+    width:100%;
+  }
+
+  .toggle-group{
+
+    width:100%;
+
+    justify-content:space-between;
+  }
+
+  .toggle-chip{
+
+    flex:1;
+  }
+
+  .btn-delete-mini{
+
+    width:100%;
+  }
+
 }

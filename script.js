@@ -1740,7 +1740,7 @@ Dokumentasi terlampir.
     return teks || "-";
   }
   
-  function copyCaptionWA() {
+  function copyLaporanWA() {
 
   const text = document.getElementById("hasilLaporan").value;
 

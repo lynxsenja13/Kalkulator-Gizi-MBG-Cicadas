@@ -2087,20 +2087,59 @@ function blokGizi(judul, data) {
     menuHarian[index] = value;
   }
   
-  // ❌ HAPUS semua beforeunload lama dulu
-  
   let isDataChanged = false;
   
   document.addEventListener("input", () => {
     isDataChanged = true;
   });
-  
-  window.addEventListener("beforeunload", function (e) {
-    if (!isDataChanged) return;
-  
+
+document.addEventListener("keydown", function (e) {
+
+  // CTRL + R
+  if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === "r") {
+
     e.preventDefault();
-    e.returnValue = '';
-  });
+
+    Swal.fire({
+      title: "Yakin ingin reload?",
+      text: "Perubahan yang belum disimpan bisa hilang",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonText: "Ya, reload",
+      cancelButtonText: "Batal"
+    }).then((result) => {
+
+      if (result.isConfirmed) {
+        location.reload();
+      }
+
+    });
+
+  }
+
+  // F5
+  if (e.key === "F5") {
+
+    e.preventDefault();
+
+    Swal.fire({
+      title: "Yakin ingin refresh?",
+      text: "Data yang belum disimpan bisa hilang",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonText: "Refresh",
+      cancelButtonText: "Batal"
+    }).then((result) => {
+
+      if (result.isConfirmed) {
+        location.reload();
+      }
+
+    });
+
+  }
+
+});
   
 window.addEventListener("load", () => {
 

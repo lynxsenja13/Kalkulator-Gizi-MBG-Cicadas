@@ -2088,14 +2088,20 @@ function blokGizi(judul, data) {
     e.returnValue = '';
   });
   
-  window.addEventListener("load", () => {
-    renderEditorPenerima();
-    isDataChanged = false;
-  });
+  window.addEventListener("load",()=>{
+
+  loadDataPenerima();
+
+  renderEditorPenerima();
+
+});
   
   document.addEventListener("DOMContentLoaded", () => {
-    isDataChanged = false;
-  });
+    loadDataPenerima();
+
+  renderEditorPenerima();
+
+});
   
   function konfirmasiAksi(pesan, callback) {
     const yakin = confirm(pesan);
@@ -2994,6 +3000,8 @@ function updateJumlahPenerima(index, value) {
   window.dataPenerima[index].jumlah =
     Number(value) || 0;
 
+  simpanDataPenerima();
+
   generateCaptionHarian();
 
 }
@@ -3002,6 +3010,8 @@ function updateNamaPenerima(index, value) {
 
   window.dataPenerima[index].nama =
     value;
+
+  simpanDataPenerima();
 
   generateCaptionHarian();
 
@@ -3015,6 +3025,8 @@ function togglePenerimaChip(index) {
   renderEditorPenerima();
 
   generateCaptionHarian();
+  
+  simpanDataPenerima();
 
 }
 
@@ -3026,6 +3038,8 @@ function toggleMakanChip(index) {
   renderEditorPenerima();
 
   generateCaptionHarian();
+
+  simpanDataPenerima();
 
 }
 
@@ -3079,6 +3093,8 @@ function tambahPenerima() {
 
   generateCaptionHarian();
 
+  simpanDataPenerima();
+
 }
 
 function hapusPenerima(index) {
@@ -3088,6 +3104,8 @@ function hapusPenerima(index) {
   renderEditorPenerima();
 
   generateCaptionHarian();
+
+  simpanDataPenerima();
 
 }
 
@@ -3232,9 +3250,6 @@ function updateTotalDariTextarea() {
     `Jumlah makan : *${jumlahMakan}* porsi.`
   );
 
-  document.getElementById("captionOutput").value =
-    text;
-
 }
 
 function handleTextareaRealtime() {
@@ -3246,5 +3261,28 @@ function handleTextareaRealtime() {
     syncTextareaToDataTemporary();
 
   }, 500);
+
+}
+
+function simpanDataPenerima() {
+
+  localStorage.setItem(
+    "dataPenerimaMBG",
+    JSON.stringify(window.dataPenerima)
+  );
+
+}
+
+function loadDataPenerima() {
+
+  const saved =
+    localStorage.getItem("dataPenerimaMBG");
+
+  if (saved) {
+
+    window.dataPenerima =
+      JSON.parse(saved);
+
+  }
 
 }

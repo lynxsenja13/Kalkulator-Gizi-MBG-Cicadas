@@ -1598,38 +1598,23 @@ function generateListPenerima() {
     }
   }
 
-function copyCaptionWA() {
+window.copyCaptionWA = function () {
 
   const textarea = document.getElementById("hasilLaporan");
 
-  navigator.clipboard.writeText(textarea.value)
-    .then(() => {
+  navigator.clipboard.writeText(textarea.value);
 
-      Swal.fire({
-        toast: true,
-        position: "bottom",
-        icon: "success",
-        title: "Berhasil disalin",
-        showConfirmButton: false,
-        timer: 1500,
-        timerProgressBar: true
-      });
+  Swal.fire({
+    toast: true,
+    position: "bottom",
+    icon: "success",
+    title: "Berhasil disalin",
+    showConfirmButton: false,
+    timer: 1500,
+    timerProgressBar: true
+  });
 
-    })
-    .catch(() => {
-
-      Swal.fire({
-        toast: true,
-        position: "bottom",
-        icon: "error",
-        title: "Gagal menyalin",
-        showConfirmButton: false,
-        timer: 2000
-      });
-
-    });
-
-}
+};
 
   function prosesLaporan() {
 

@@ -2406,11 +2406,14 @@ button:active {
     padding 0.35s ease;
 
   padding:0 20px;
+  overflow-y:auto;
 }
 
 /* ACTIVE */
 .pengaturan-content.show{
-  max-height:1500px;
+
+  max-height:10000px;
+
   padding:20px;
 }
 

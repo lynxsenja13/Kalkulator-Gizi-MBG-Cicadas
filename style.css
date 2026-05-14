@@ -2398,25 +2398,26 @@ button:active {
 /* CONTENT */
 .pengaturan-content{
 
-  max-height:0;
+  height:0;
+
   overflow:hidden;
 
   transition:
-    max-height 0.35s ease,
+    height 0.35s ease,
     padding 0.35s ease;
 
   padding:0 20px;
-  overflow-y:auto;
 }
 
 /* ACTIVE */
 .pengaturan-content.show{
 
-  max-height:10000px;
+  height:auto;
+
+  overflow:visible;
 
   padding:20px;
 }
-
 /* ITEM */
 .penerima-item{
 
@@ -2680,4 +2681,19 @@ button:active {
     width:100%;
   }
 
+}
+
+@media (max-width:768px){
+
+  .pengaturan-content{
+
+    overflow:visible !important;
+  }
+
+}
+
+#editorPenerima{
+
+  display:flex;
+  flex-direction:column;
 }

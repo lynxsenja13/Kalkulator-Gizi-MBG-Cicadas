@@ -3176,49 +3176,6 @@ function simpanPengaturanPenerima() {
 
 }
 
-function syncTextareaToDataTemporary() {
-
-  const textarea =
-    document.getElementById("captionOutput");
-
-  const text =
-    textarea.value;
-
-  const regex =
-    /^\d+\.\s(.*?)\s=\s(\d+)/gm;
-
-  const hasil = [];
-
-  let match;
-
-  while ((match = regex.exec(text)) !== null) {
-
-    hasil.push({
-
-      nama: match[1].trim(),
-
-      jumlah: Number(match[2]) || 0,
-
-      // default sementara
-      hitungPenerima: true,
-      hitungMakan: true
-
-    });
-
-  }
-
-  // JIKA ADA HASIL
-  if (hasil.length > 0) {
-
-    // TEMP ONLY
-    window.tempDataPenerima = hasil;
-
-    updateTotalDariTextarea();
-
-  }
-
-}
-
 function updateTotalDariTextarea() {
 
   const data =
@@ -3284,5 +3241,82 @@ function loadDataPenerima() {
       JSON.parse(saved);
 
   }
+
+}
+
+function syncTextareaNumbers() {
+
+  const textarea =
+    document.getElementById("captionOutput");
+
+  const text =
+    textarea.value;
+
+  const regex =
+    /^\d+\.\s(.*?)\s=\s(\d+)/gm;
+
+  let match;
+
+  while ((match = regex.exec(text)) !== null) {
+
+    const nama =
+      match[1].trim();
+
+    const jumlah =
+      Number(match[2]) || 0;
+
+    const item =
+      window.dataPenerima.find(x =>
+        x.nama.trim().toUpperCase() ===
+        nama.toUpperCase()
+      );
+
+    if (item) {
+
+      item.jumlah = jumlah;
+
+    }
+
+  }
+
+  updateTotalOnly();
+
+}
+
+function updateTotalOnly() {
+
+  const textarea =
+    document.getElementById("captionOutput");
+
+  let text =
+    textarea.value;
+
+  const jumlahPenerima =
+    hitungJumlahPenerima();
+
+  const jumlahMakan =
+    hitungJumlahMakan();
+
+  text = text.replace(
+    /Jumlah penerima sebanyak \*?\d+\*? orang\.?/,
+    `Jumlah penerima sebanyak *${jumlahPenerima}* orang.`
+  );
+
+  text = text.replace(
+    /Jumlah makan : \*?\d+\*? porsi\.?/,
+    `Jumlah makan : *${jumlahMakan}* porsi.`
+  );
+
+  // simpan posisi cursor
+  const start =
+    textarea.selectionStart;
+
+  const end =
+    textarea.selectionEnd;
+
+  textarea.value = text;
+
+  // restore cursor
+  textarea.setSelectionRange(start,end);
 
 }

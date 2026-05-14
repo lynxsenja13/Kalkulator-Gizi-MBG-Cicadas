@@ -1600,9 +1600,9 @@ function generateListPenerima() {
 
 window.copyCaptionWA = function () {
 
-  const laporan = document.getElementById("preview");
+  const hasilDiv = document.getElementById("hasil");
 
-  navigator.clipboard.writeText(laporan.innerText);
+  navigator.clipboard.writeText(hasilDiv.innerText);
 
   Swal.fire({
     toast: true,

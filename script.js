@@ -1751,12 +1751,14 @@ Dokumentasi terlampir.
     }
   
     navigator.clipboard.writeText(window.lastLaporanText);
-    Swal.fire({
-      title: "Berhasil!",
-      text: "Laporan berhasil disalin",
+   Swal.fire({
+      toast: true,
+      position: "bottom",
       icon: "success",
-      timer: 1800,
-      showConfirmButton: false
+      title: "Berhasil disalin",
+      showConfirmButton: false,
+      timer: 1500,
+      timerProgressBar: true
     });
   }
   

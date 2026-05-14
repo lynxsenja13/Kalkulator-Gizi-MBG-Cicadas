@@ -1597,7 +1597,27 @@ function generateListPenerima() {
       document.getElementById("btnLapGizi").classList.add("active-subtab");
     }
   }
+
+  function copyCaptionWA() {
+    const el = document.getElementById("captionOutput");
+    if (!el) return;
   
+    const text = el.value;
+  
+    navigator.clipboard.writeText(text).then(() => {
+      const btn = document.querySelector(".btn-copy-wa");
+      if (!btn) return;
+  
+      const oldText = btn.innerHTML;
+  
+      btn.innerHTML = "✅ Tersalin!";
+      
+      setTimeout(() => {
+        btn.innerHTML = oldText;
+      }, 2000);
+    });
+  }
+
   function prosesLaporan() {
 
   // =========================

@@ -1,4 +1,4 @@
-  //Berhasil
+  //UpdateAlert
   let textareaTimer;
   
   let bahanMaster = {

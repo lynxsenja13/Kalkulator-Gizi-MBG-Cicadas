@@ -1602,31 +1602,32 @@ function copyCaptionWA() {
 
   const textarea = document.getElementById("hasilLaporan");
 
-  if (!textarea || !textarea.value.trim()) {
+  navigator.clipboard.writeText(textarea.value)
+    .then(() => {
 
-    Swal.fire({
-      toast: true,
-      position: "bottom",
-      icon: "warning",
-      title: "Generate laporan dulu",
-      showConfirmButton: false,
-      timer: 1500
+      Swal.fire({
+        toast: true,
+        position: "bottom",
+        icon: "success",
+        title: "Berhasil disalin",
+        showConfirmButton: false,
+        timer: 1500,
+        timerProgressBar: true
+      });
+
+    })
+    .catch(() => {
+
+      Swal.fire({
+        toast: true,
+        position: "bottom",
+        icon: "error",
+        title: "Gagal menyalin",
+        showConfirmButton: false,
+        timer: 2000
+      });
+
     });
-
-    return;
-  }
-
-  navigator.clipboard.writeText(textarea.value);
-
-  Swal.fire({
-    toast: true,
-    position: "bottom",
-    icon: "success",
-    title: "Berhasil disalin",
-    showConfirmButton: false,
-    timer: 1500,
-    timerProgressBar: true
-  });
 
 }
 

@@ -580,8 +580,12 @@ function generateListPenerima() {
       saveCache();
   
     } catch (err) {
-      console.error("Gagal load database:", err);
-      alert("Database gagal dimuat. Cek Apps Script.");
+      Swal.fire({
+        icon: "error",
+        title: "Database Gagal Dimuat",
+        text: "Periksa koneksi atau Apps Script",
+        footer: "Gagal mengambil database"
+      });
     }
   }
   
@@ -1738,12 +1742,22 @@ Dokumentasi terlampir.
   
   function copyLaporanWA() {
     if (!window.lastLaporanText) {
-      alert("Generate laporan dulu");
+      Swal.fire({
+        icon: "warning",
+        title: "Belum Ada Laporan",
+        text: "Silakan generate laporan terlebih dahulu"
+      });
       return;
     }
   
     navigator.clipboard.writeText(window.lastLaporanText);
-    alert("Berhasil disalin untuk WhatsApp ✅");
+    Swal.fire({
+      title: "Berhasil!",
+      text: "Laporan berhasil disalin",
+      icon: "success",
+      timer: 1800,
+      showConfirmButton: false
+    });
   }
   
   function tambahMenuInput() {
@@ -2104,9 +2118,23 @@ function blokGizi(judul, data) {
 });
   
   function konfirmasiAksi(pesan, callback) {
-    const yakin = confirm(pesan);
-    if (yakin) callback();
-  }
+
+  Swal.fire({
+    title: "Konfirmasi",
+    text: pesan,
+    icon: "question",
+    showCancelButton: true,
+    confirmButtonText: "Ya",
+    cancelButtonText: "Batal"
+  }).then((result) => {
+
+    if (result.isConfirmed) {
+      callback();
+    }
+
+  });
+
+}
   
 function kirimSpreadsheet() {
 
